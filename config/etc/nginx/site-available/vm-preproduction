@@ -10,7 +10,7 @@ server {
     index index.php index.html index.htm;
 
     # Your Domain Name
-    server_name preprod-auth.laravel-project.local;
+    server_name preprod.laravel-project.local;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
