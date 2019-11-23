@@ -109,6 +109,42 @@ storage
   cap production deploy
   ```
 
+### Manual Trigger
+* Reload / Restart NGINX
+  ```
+  cap [environment] nginx:[manual_reload|manual_restart]
+  ---
+  cap staging nginx:manual_reload
+  cap staging nginx:manual_restart
+  ```
+
+* Reload / Restart PHP-FPM (php7.2-fpm)
+  ```
+  cap [environment] phpfpm:[manual_reload|manual_restart]
+  ---
+  cap staging phpfpm:manual_reload
+  cap staging phpfpm:manual_restart
+  ```
+
+* Install / Dump Autoload Composer
+  ```
+  cap [environment] composer:[install|dumpautoload|initialize]
+  ---
+  cap staging composer:install
+  cap staging composer:dumpautoload
+  cap staging composer:initialize   ## (will run install & dumpautoload)
+  ```
+
+* Clear View / Clear Cache Framework
+  ```
+  cap [environment] artisan:[clear_view|clear_cache|clear_all]
+  ---
+  cap staging artisan:clear_view
+  cap staging artisan:clear_cache
+  cap staging artisan:clear_all   ## (will run clear_view & clear_cache)
+  ```
+
+
 ### Properties
 * Author  : **@zeroc0d3 (ZeroC0D3Lab)**
 * License : **Apache ver-2**
