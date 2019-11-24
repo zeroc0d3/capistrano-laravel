@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.10.1"
+lock "~> 3.11.2"
 
 set :application, "laravel-project"
 set :repo_url, "git@github.com:zeroc0d3/laravel-project.git"

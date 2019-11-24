@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
 group :development do
-  gem 'byebug'
-  gem 'capistrano'
-  gem 'capistrano-rvm'
+  gem 'byebug', '~> 11.0.1'
+  gem 'capistrano', '~> 3.11.2'
+  gem 'capistrano-rvm', '~> 0.1.2'
 end
 
 group :development, :test  do
-  gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
-  gem 'sshkit-sudo'
+  gem 'capistrano-sidekiq', '~> 1.0.3', github: 'seuros/capistrano-sidekiq'
+  gem 'sshkit-sudo', '~> 0.1.0'
 end
 
 group :test do
-  gem 'minitest', '~> 5.10.3'
+  gem 'minitest', '~> 5.13.0'
 end
