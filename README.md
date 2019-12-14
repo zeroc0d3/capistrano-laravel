@@ -144,6 +144,25 @@ storage
   cap staging artisan:clear_all   ## (will run clear_view & clear_cache)
   ```
 
+* NPM Package Dependencies
+  ```
+  cap [environment] npm:[install|update|cleanup|reinstall]
+  ---
+  cap staging npm:install
+  cap staging npm:update
+  cap staging npm:cleanup
+  cap staging npm:reinstall ## (will run cleanup & install)
+  ```
+
+* Yarn Package Dependencies
+  ```
+  cap [environment] yarn:[install|update|cleanup|reinstall]
+  ---
+  cap staging yarn:install
+  cap staging yarn:update
+  cap staging yarn:cleanup
+  cap staging yarn:reinstall ## (will run cleanup & install)
+  ```
 
 ### Properties
 * Author  : **@zeroc0d3 (ZeroC0D3Lab)**

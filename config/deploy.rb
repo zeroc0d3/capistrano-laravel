@@ -169,9 +169,77 @@ namespace :artisan do
   end
 end
 
+namespace :npm do
+  desc 'Install NPM'
+  task :install do
+    on roles(:all) do
+      execute "cd #{fetch(:src_current)}; npm install"
+    end
+  end
+
+  desc 'Update NPM'
+  task :update do
+    on roles(:all) do
+      execute "cd #{fetch(:src_current)}; npm update"
+    end
+  end
+
+  desc 'Remove Old NPM'
+  task :cleanup do
+    on roles(:all) do
+      # execute "cd #{fetch(:src_current)}; rm -rf node_modules"
+      execute "cd #{fetch(:src_current)}; rm -f package-lock.json"
+    end
+  end
+
+  task :reinstall do
+    on roles(:all) do
+      invoke 'npm:cleanup'
+      invoke 'npm:install'
+    end
+  end
+end
+
+namespace :yarn do
+  desc 'Install Yarn'
+  task :install do
+    on roles(:all) do
+      execute "cd #{fetch(:src_current)}; yarn install"
+    end
+  end
+
+  desc 'Update Yarn'
+  task :update do
+    on roles(:all) do
+      execute "cd #{fetch(:src_current)}; yarn update"
+    end
+  end
+
+  desc 'Remove Old Yarn'
+  task :cleanup do
+    on roles(:all) do
+      # execute "cd #{fetch(:src_current)}; rm -rf node_modules"
+      execute "cd #{fetch(:src_current)}; rm -f yarn.lock"
+    end
+  end
+
+  task :reinstall do
+    on roles(:all) do
+      invoke 'yarn:cleanup'
+      invoke 'yarn:install'
+    end
+  end
+end
+
 after 'deploy:publishing', 'deploy:restart'
 after 'deploy:restart', 'composer:initialize'
 after 'deploy:restart', 'artisan:clear_all'
+
+### NPM ###
+# after 'deploy:restart', 'npm:reinstall'
+### YARN ###
+# after 'deploy:restart', 'yarn:reinstall'
+
 after 'deploy:restart', 'nginx:manual_reload'
 
 after 'chown:restore', 'nginx:manual_reload'
