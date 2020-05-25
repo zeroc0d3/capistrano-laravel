@@ -7,7 +7,7 @@ group :development do
 end
 
 group :development, :test  do
-  gem 'capistrano-sidekiq', '~> 1.0.3', github: 'seuros/capistrano-sidekiq'
+  gem 'capistrano-sidekiq', '~> 2.0.0.beta2', github: 'seuros/capistrano-sidekiq'
   gem 'sshkit-sudo', '~> 0.1.0'
 end
 
