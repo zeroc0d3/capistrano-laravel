@@ -1,5 +1,16 @@
 server {
+    if ($host = staging.laravel-project.local) {
+        return 301 https://$host$request_uri;
+    }
+
+    server_name staging.laravel-project.local;
     listen 80;
+    listen [::]:80;
+    return 404;
+}
+
+server {
+    listen 443 ssl;
 
     # Log files for Debugging
     access_log /var/www/laravel-project/staging/shared/log/access.log;
@@ -25,4 +36,9 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
+
+    ssl_certificate /etc/letsencrypt/live/staging.laravel-project.local/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/staging.laravel-project.local/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
