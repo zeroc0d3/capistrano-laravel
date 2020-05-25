@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.2"
 
-set :application, "laravel-project"
-set :repo_url, "git@github.com:zeroc0d3/laravel-project.git"
+set :application, "mgunite-warehouse"
+set :repo_url, "git@gitlab.com:mgunite-project/mgunite-warehouse-newgen.git"
 
 # Default branch is :master
 set :branch, "master"
@@ -22,7 +22,7 @@ set :release_storage, "#{fetch(:src_release)}/storage"
 set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "#{fetch(:source)}/.env", "#{fetch(:source)}/composer.json", "#{fetch(:source)}/package.json"
+append :linked_files, "#{fetch(:source)}/.env", "#{fetch(:source)}/composer.json", "#{fetch(:source)}/composer.lock", "#{fetch(:source)}/package.json", "#{fetch(:source)}/yarn.lock"
 
 # Default value for :linked_dirs []
 append :linked_dirs, "#{fetch(:source)}/vendor", "#{fetch(:source)}/node_modules", "#{fetch(:source)}/storage"
@@ -161,10 +161,26 @@ namespace :artisan do
     end
   end
 
+  desc 'Clear Debugbar'
+  task :clear_debug do
+    on roles(:all) do
+      execute "cd #{fetch(:src_current)}; php artisan debugbar:clear"
+    end
+  end
+
+  desc 'Clear Event'
+  task :clear_event do
+    on roles(:all) do
+      execute "cd #{fetch(:src_current)}; php artisan event:clear"
+    end
+  end
+
   task :clear_all do
     on roles(:all) do
       invoke 'artisan:clear_view'
       invoke 'artisan:clear_cache'
+      invoke 'artisan:clear_debug'
+      invoke 'artisan:clear_event'
     end
   end
 end
@@ -233,6 +249,7 @@ end
 
 after 'deploy:publishing', 'deploy:restart'
 after 'deploy:restart', 'composer:initialize'
+after 'deploy:restart', 'composer:dumpautoload'
 after 'deploy:restart', 'artisan:clear_all'
 
 ### NPM ###

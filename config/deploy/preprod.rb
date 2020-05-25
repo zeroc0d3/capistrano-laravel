@@ -1,6 +1,6 @@
 ask(:password, nil, echo: false)
 # Unsecure Deploy
-# server '192.168.122.122', user: 'root', roles: %w{app web db}
+# server '192.168.122.122', user: 'root', port: 22, roles: %w{app web db}
 
 # Secure Deploy
 server '192.168.122.122', user: 'root', port: 22, password: fetch(:password), roles: %w{app web db}

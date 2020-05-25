@@ -6,7 +6,7 @@ ask(:password, nil, echo: false)
 server '192.168.122.122', user: 'root', port: 22, password: fetch(:password), roles: %w{app web db}
 
 # Default branch is :master
-set :branch, "staging"
+set :branch, "dev-master"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :root_path, "/var/www/laravel-project"
