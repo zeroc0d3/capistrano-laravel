@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.2"
 
-set :application, "mgunite-warehouse"
-set :repo_url, "git@gitlab.com:mgunite-project/mgunite-warehouse-newgen.git"
+set :application, "laravel-project"
+set :repo_url, "git@github.com:zeroc0d3/laravel-project.git"
 
 # Default branch is :master
 set :branch, "master"
