@@ -118,7 +118,7 @@ storage
   cap staging nginx:manual_restart
   ```
 
-* Reload / Restart PHP-FPM (php7.2-fpm)
+* Reload / Restart PHP-FPM (php7.4-fpm)
   ```
   cap [environment] phpfpm:[manual_reload|manual_restart]
   ---

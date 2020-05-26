@@ -97,14 +97,14 @@ namespace :phpfpm do
   desc 'Reload PHP-FPM'
   task :manual_reload do
     on roles(:all) do
-      sudo :service, :'php7.2-fpm', :reload
+      sudo :service, :'php7.4-fpm', :reload
     end
   end
 
   desc 'Restart PHP-FPM'
   task :manual_start do
     on roles(:all), in: :sequence do
-      execute! :sudo, :service, :'php7.2-fpm', :restart
+      execute! :sudo, :service, :'php7.4-fpm', :restart
     end
   end
 
