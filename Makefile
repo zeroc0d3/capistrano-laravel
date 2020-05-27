@@ -117,6 +117,42 @@ clear-config:
 	@cd ${PATH_WORKSPACE} && php artisan config:clear
 	@echo '- DONE -'
 
+clear-debug:
+	@echo "============================================"
+	@echo " Task      : Clear Debugbar Cache View "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && php artisan debugbar:clear
+	@echo '- DONE -'
+
+clear-event:
+	@echo "============================================"
+	@echo " Task      : Clear Event Cache View "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && php artisan event:clear
+	@echo '- DONE -'
+
+clear-all:
+	@echo "============================================"
+	@echo " Task      : Clear Config Cache View "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && php artisan view:clear
+	@cd ${PATH_WORKSPACE} && php artisan cache:clear
+	@cd ${PATH_WORKSPACE} && php artisan config:clear
+	@cd ${PATH_WORKSPACE} && php artisan debugbar:clear
+	@cd ${PATH_WORKSPACE} && php artisan event:clear
+	@echo '- DONE -'
+
+fixing-cache:
+	@echo "============================================"
+	@echo " Task      : Fixing Cache Path"
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && for i in {'sessions','views','cache'}; do mkdir -p storage/framework/$i; done
+	@echo '- DONE -'
+
 run-migrate:
 	@echo "============================================"
 	@echo " Task      : Running Artisan Migrate "
@@ -133,10 +169,58 @@ run-seed:
 	@cd ${PATH_WORKSPACE} && php artisan db:seed
 	@echo '- DONE -'
 
+run-migrate-all:
+	@echo "============================================"
+	@echo " Task      : Running Artisan Migrate & Seed "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && php artisan migrate:install && php artisan migrate --seed
+	@echo '- DONE -'
+
+run-npm:
+	@echo "============================================"
+	@echo " Task      : Running NPM Install "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && npm install
+	@echo '- DONE -'
+
+run-yarn:
+	@echo "============================================"
+	@echo " Task      : Running YARN Install "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && yarn install
+	@echo '- DONE -'
+
+run-mix-dev:
+	@echo "============================================"
+	@echo " Task      : Running Mix Develop "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && npm run dev
+	@echo '- DONE -'
+
+run-mix-prod:
+	@echo "============================================"
+	@echo " Task      : Running Mix Production "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && npm run production
+	@echo '- DONE -'
+
+run-mix-watch:
+	@echo "============================================"
+	@echo " Task      : Running Mix Watch "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && npm run watch
+	@echo '- DONE -'
+
 run-project:
 	@echo "============================================"
 	@echo " Task      : Running Project "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
-	@cd ${PATH_WORKSPACE} && php artisan serve
+	@cd ${PATH_WORKSPACE} && php artisan serve --port=8080
 	@echo '- DONE -'
