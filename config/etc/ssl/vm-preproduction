@@ -13,11 +13,11 @@ server {
     listen 443 ssl;
 
     # Log files for Debugging
-    access_log /var/www/laravel-project/preprod/shared/log/access.log;
-    error_log /var/www/laravel-project/preprod/shared/log/error.log;
+    access_log /var/www/preprod/shared/log/access.log;
+    error_log /var/www/preprod/shared/log/error.log;
 
     # Webroot Directory for Laravel project
-    root /var/www/laravel-project/preprod/current/src/public;
+    root /var/www/preprod/current/src/public;
     index index.php index.html index.htm;
 
     # Your Domain Name

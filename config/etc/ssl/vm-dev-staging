@@ -1,9 +1,9 @@
 server {
-    if ($host = staging.laravel-project.local) {
+    if ($host = dev-staging.laravel-project.local) {
         return 301 https://$host$request_uri;
     }
 
-    server_name staging.laravel-project.local;
+    server_name dev-staging.laravel-project.local;
     listen 80;
     listen [::]:80;
     return 404;
@@ -13,15 +13,15 @@ server {
     listen 443 ssl;
 
     # Log files for Debugging
-    access_log /var/www/laravel-project/staging/shared/log/access.log;
-    error_log /var/www/laravel-project/staging/shared/log/error.log;
+    access_log /var/www/dev-staging/shared/log/access.log;
+    error_log /var/www/dev-staging/shared/log/error.log;
 
     # Webroot Directory for Laravel project
-    root /var/www/laravel-project/staging/current/src/public;
+    root /var/www/dev-staging/current/src/public;
     index index.php index.html index.htm;
 
     # Your Domain Name
-    server_name staging.laravel-project.local;
+    server_name dev-staging.laravel-project.local;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -37,8 +37,8 @@ server {
         include fastcgi_params;
     }
 
-    ssl_certificate /etc/letsencrypt/live/staging.laravel-project.local/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/staging.laravel-project.local/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/dev-staging.laravel-project.local/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dev-staging.laravel-project.local/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }

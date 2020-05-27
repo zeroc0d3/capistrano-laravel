@@ -2,11 +2,11 @@ server {
     listen 80;
 
     # Log files for Debugging
-    access_log /var/www/laravel-project/dev-staging/shared/log/access.log;
-    error_log /var/www/laravel-project/dev-staging/shared/log/error.log;
+    access_log /var/www/dev-staging/shared/log/access.log;
+    error_log /var/www/dev-staging/shared/log/error.log;
 
     # Webroot Directory for Laravel project
-    root /var/www/laravel-project/dev-staging/current/src/public;
+    root /var/www/dev-staging/current/src/public;
     index index.php index.html index.htm;
 
     # Your Domain Name

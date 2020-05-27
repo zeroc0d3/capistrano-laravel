@@ -1,15 +1,15 @@
 ask(:password, nil, echo: false)
 # Unsecure Deploy
-# server '192.168.122.122', user: 'root', port: 22, roles: %w{app web db}
+server '192.168.122.122', user: 'root', port: 22, roles: %w{app web db}
 
 # Secure Deploy
-server '192.168.122.122', user: 'root', port: 22, password: fetch(:password), roles: %w{app web db}
+# server '192.168.122.122', user: 'root', port: 22, password: fetch(:password), roles: %w{app web db}
 
 # Default branch is :master
-set :branch, "dev-master"
+set :branch, "production"
 
 # Default deploy_to directory is /var/www/my_app_name
-set :root_path, "/var/www/laravel-project"
+set :root_path, "/var/www/production"
 set :deploy_to, "#{fetch(:root_path)}/#{fetch(:branch)}"
 set :shared_folder, "#{fetch(:deploy_to)}/shared"
 set :tmp_dir, "#{fetch(:deploy_to)}/tmp"
