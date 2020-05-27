@@ -45,11 +45,13 @@ Zero downtime deployment Laravel with Capistrano
 
 ### Symlink Files (Default)
 ```
-append :linked_files, "#{fetch(:source)}/.env", "#{fetch(:source)}/composer.json", "#{fetch(:source)}/package.json"
+append :linked_files, "#{fetch(:source)}/.env", "#{fetch(:source)}/composer.json", "#{fetch(:source)}/composer.lock", "#{fetch(:source)}/package.json", "#{fetch(:source)}/yarn.lock",
 ---
 .env
 composer.json
+composer.lock
 package.json
+yarn.lock
 ```
 
 ### Symlink Folders (Default)
@@ -71,9 +73,11 @@ storage
 │   │   └── 20191123134641   ### the latest symlink
 │   │       ├── .env -> /var/www/[laravel-project]/staging/shared/src/.env
 │   │       ├── composer.json -> /var/www/[laravel-project]/staging/shared/src/composer.json
+│   │       ├── composer.lock -> /var/www/[laravel-project]/staging/shared/src/composer.lock
 │   │       ├── vendor -> /var/www/[laravel-project]/staging/shared/src/vendor/
 │   │       ├── node_modules -> /var/www/[laravel-project]/staging/shared/src/node_modules/
-│   │       └── storage -> /var/www/[laravel-project]/staging/shared/src/storage/
+│   │       ├── storage -> /var/www/[laravel-project]/staging/shared/src/storage/
+│   │       └── yarn.lock -> /var/www/[laravel-project]/staging/shared/src/yarn.lock
 │   ├── shared
 │   │   ├── log
 │   │   └── src
