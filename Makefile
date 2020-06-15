@@ -95,7 +95,7 @@ key-generate:
 
 clear-view:
 	@echo "============================================"
-	@echo " Task      : Clear Compiled View "
+	@echo " Task      : Clear Compiled Views "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
 	@cd ${PATH_WORKSPACE} && php artisan view:clear
@@ -103,7 +103,7 @@ clear-view:
 
 clear-cache:
 	@echo "============================================"
-	@echo " Task      : Clear Application Cache View "
+	@echo " Task      : Clear Application Cache "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
 	@cd ${PATH_WORKSPACE} && php artisan cache:clear
@@ -111,38 +111,38 @@ clear-cache:
 
 clear-config:
 	@echo "============================================"
-	@echo " Task      : Clear Config Cache View "
+	@echo " Task      : Clear Configuration Cache "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
 	@cd ${PATH_WORKSPACE} && php artisan config:clear
 	@echo '- DONE -'
 
-clear-debug:
-	@echo "============================================"
-	@echo " Task      : Clear Debugbar Cache View "
-	@echo " Date/Time : `date`"
-	@echo "============================================"
-	@cd ${PATH_WORKSPACE} && php artisan debugbar:clear
-	@echo '- DONE -'
-
 clear-event:
 	@echo "============================================"
-	@echo " Task      : Clear Event Cache View "
+	@echo " Task      : Clear Cached Event "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
 	@cd ${PATH_WORKSPACE} && php artisan event:clear
 	@echo '- DONE -'
 
+clear-debug:
+	@echo "============================================"
+	@echo " Task      : Clear Debugbar Storage "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && php artisan debug:clear
+	@echo '- DONE -'
+
 clear-all:
 	@echo "============================================"
-	@echo " Task      : Clear Config Cache View "
+	@echo " Task      : Clear All Cache "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
 	@cd ${PATH_WORKSPACE} && php artisan view:clear
 	@cd ${PATH_WORKSPACE} && php artisan cache:clear
 	@cd ${PATH_WORKSPACE} && php artisan config:clear
-	@cd ${PATH_WORKSPACE} && php artisan debugbar:clear
 	@cd ${PATH_WORKSPACE} && php artisan event:clear
+	@cd ${PATH_WORKSPACE} && php artisan debug:clear
 	@echo '- DONE -'
 
 fixing-cache:
