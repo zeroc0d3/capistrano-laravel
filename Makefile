@@ -74,7 +74,7 @@ composer-update:
 	@echo " Task      : Composer Update "
 	@echo " Date/Time : `date`"
 	@echo "============================================"
-	@cd ${PATH_WORKSPACE} && composer install
+	@cd ${PATH_WORKSPACE} && composer update
 	@echo '- DONE -'
 
 composer-dumpautoload:
@@ -83,6 +83,14 @@ composer-dumpautoload:
 	@echo " Date/Time : `date`"
 	@echo "============================================"
 	@cd ${PATH_WORKSPACE} && composer dumpautoload -o
+	@echo '- DONE -'
+
+composer-selfupdate:
+	@echo "============================================"
+	@echo " Task      : Composer Update "
+	@echo " Date/Time : `date`"
+	@echo "============================================"
+	@cd ${PATH_WORKSPACE} && composer self-update
 	@echo '- DONE -'
 
 key-generate:
