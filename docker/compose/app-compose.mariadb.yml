@@ -1,0 +1,93 @@
+version: '3.6'
+
+#================================================================================================
+# NETWORK SETUP
+#================================================================================================
+networks:
+  zeroc0d3lab_net:
+    name: ${NETWORKS_NAME:-zeroc0d3lab_net}
+    driver: ${NETWORKS_DRIVER:-bridge}
+    ipam:
+      config:
+        - subnet: 172.125.125.0/16
+
+#================================================================================================
+# VOLUME SETUP
+#================================================================================================
+volumes:
+  adminer:
+    driver: ${VOLUMES_DRIVER:-local}
+  mariadb:
+    driver: ${VOLUMES_DRIVER:-local}
+  portainer:
+    driver: ${VOLUMES_DRIVER:-local}
+
+services:
+#================================================================================================
+# ADMINER
+#================================================================================================
+  adminer:
+    image: dockerframework/adminer:${ADMINER_VERSION:-4.7.7}
+    container_name: ${CONTAINER_ADMINER:-zeroc0d3lab_adminer}
+    ports:
+      - "${PORT_ADMINER:-5210}:8080"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${SESSION_ADMINER:-/data/docker/session/adminer}:/sessions
+    environment:
+      - TZ="Asia/Jakarta"
+      - ADMINER_VERSION=${ADMINER_VERSION:-4.7.7}
+      - INSTALL_MSSQL=${INSTALL_MSSQL:-false}
+    privileged: true
+    networks:
+      zeroc0d3lab_net:
+        ipv4_address: ${CONTAINER_IP_ADMINER:-172.125.125.3}
+
+#================================================================================================
+# MARIADB
+#================================================================================================
+  mariadb:
+    image: yobasystems/alpine-mariadb:${MARIADB_VERSION}
+    container_name: ${CONTAINER_MARIADB:-zeroc0d3lab_mariadb}
+    restart: always
+    ports:
+      - "${PORT_MARIADB:-3306}:3306"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_MARIADB:-/data/docker/mariadb}:/var/lib/mysql
+      - ./config/my.cnf:/etc/my.cnf
+      - ./config/mariadb-server.cnf:/etc/my.cnf.d/mariadb-server.cnf
+    environment:
+      - ENV=local
+      - TZ="Asia/Jakarta"
+      - MYSQL_PROFILE=my-medium
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MYSQL_ROOT_HOST=${MARIADB_ROOT_HOST}
+      - MYSQL_HOST=${MARIADB_HOST}
+      - MYSQL_DATABASE=${MARIADB_DATABASE}
+      - MYSQL_USER=${MARIADB_USER}
+      - MYSQL_PASSWORD=${MARIADB_PASSWORD}
+    privileged: true
+    tty: true
+    networks:
+      zeroc0d3lab_net:
+        ipv4_address: ${CONTAINER_IP_MARIADB:-172.125.125.4}
+
+#================================================================================================
+# PORTAINER
+#================================================================================================
+  portainer:
+    image: dockerframework/portainer:${PORTAINER_VERSION:-1.24.0}
+    container_name: ${CONTAINER_PORTAINER:-zeroc0d3lab_portainer}
+    ports:
+      - "${PORT_PORTAINER:-5212}:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_PORTAINER:-/data/docker/portainer}:/data
+    environment:
+      - PORTAINER_TEMPLATE=generic
+      - PORTAINER_VERSION=${PORTAINER_VERSION:-1.24.0}
+    privileged: true
+    networks:
+      zeroc0d3lab_net:
+        ipv4_address: ${CONTAINER_IP_PORTAINER:-172.125.125.5}

@@ -1,0 +1,5 @@
+.idea
+.project
+.env
+.log
+data/**

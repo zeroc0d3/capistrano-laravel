@@ -9,10 +9,10 @@ Zero downtime deployment Laravel with Capistrano
   ```
   git clone git@github.com:zeroc0d3/capistrano-laravel.git
   ```
-* Running bundle
+* Running docker-compose
   ```
   cd capistrano-laravel
-  bundle install
+  ./run-docker.sh
   ```
 * Edit Laravel source target in `config/deploy.rb`
   ```
@@ -37,7 +37,6 @@ Zero downtime deployment Laravel with Capistrano
   vendor
   yarn.lock
   ```
-
 * Setup number of release folder in `config/deploy.rb`
   ```
   set :keep_releases, 5    ## keep 5 release folder
@@ -97,23 +96,49 @@ storage
 └── [environments]
 ```
 
-### Deployment
+### Access Deployment Container
+* Goto container
+  ```
+  docker exec -it [CONTAINER_NAME]
+  ---
+  eg:
+  docker exec -it zeroc0d3lab_deployment bash
+  ```
+* Install Dependencies Gem
+  ```
+  rvm use [RUBY_VERSION]   # eg: RUBY_VERSION=2.7.1
+  ---
+  rvm use 2.7.1
+  bundle install
+  ```
+
+### Deployment (Inside Container)
+* Set Environment RVM
+  ```
+  rvm use [RUBY_VERSION]   # eg: RUBY_VERSION=2.7.1
+  ---
+  rvm use 2.7.1
+  ```
 * Staging
   ```
   cap staging deploy
   ```
-
 * Preproduction
   ```
   cap preprod deploy
   ```
-
 * Production
   ```
   cap production deploy
   ```
 
-### Manual Trigger
+### Manual Trigger (Inside Container)
+* Set Environment RVM
+  ```
+  rvm use [RUBY_VERSION]   # eg: RUBY_VERSION=2.7.1
+  ---
+  rvm use 2.7.1
+  ```
 * Reload / Restart NGINX
   ```
   cap [environment] nginx:[manual_reload|manual_restart]
@@ -121,7 +146,6 @@ storage
   cap staging nginx:manual_reload
   cap staging nginx:manual_restart
   ```
-
 * Reload / Restart PHP-FPM (php7.4-fpm)
   ```
   cap [environment] phpfpm:[manual_reload|manual_restart]
@@ -129,7 +153,6 @@ storage
   cap staging phpfpm:manual_reload
   cap staging phpfpm:manual_restart
   ```
-
 * Install / Dump Autoload Composer
   ```
   cap [environment] composer:[install|dumpautoload|initialize]
@@ -138,7 +161,6 @@ storage
   cap staging composer:dumpautoload
   cap staging composer:initialize   ## (will run install & dumpautoload)
   ```
-
 * Clear View / Clear Cache Framework
   ```
   cap [environment] artisan:[clear_view|clear_cache|clear_all]
@@ -147,7 +169,6 @@ storage
   cap staging artisan:clear_cache
   cap staging artisan:clear_all   ## (will run clear_view & clear_cache)
   ```
-
 * NPM Package Dependencies
   ```
   cap [environment] npm:[install|update|cleanup|reinstall]
@@ -157,7 +178,6 @@ storage
   cap staging npm:cleanup
   cap staging npm:reinstall ## (will run cleanup & install)
   ```
-
 * Yarn Package Dependencies
   ```
   cap [environment] yarn:[install|update|cleanup|reinstall]
@@ -167,6 +187,27 @@ storage
   cap staging yarn:cleanup
   cap staging yarn:reinstall ## (will run cleanup & install)
   ```
+
+### Environment Tested ###
+* Docker version
+  ```
+  docker -v
+  ---
+  Docker version 19.03.11, build 42e35e61f3
+  ```
+* Docker-compose version
+  ```
+  docker-compose -v
+  ---
+  docker-compose version 1.24.1, build 4667896b
+  ```
+* Ruby version
+  ```
+  ruby -v
+  ---
+  ruby 2.7.1p83 (2020-03-31 revision a0c7c23c9c) [x86_64-linux]
+  ```
+
 
 ### Properties
 * Author  : **@zeroc0d3 (ZeroC0D3Lab)**

@@ -12,31 +12,6 @@ export PATH_DOCKER="./docker"
 export PATH_SCRIPTS="./scripts/installer/"
 export PROJECT_NAME="laravel"
 
-install-ansible:
-	@echo "============================================"
-	@echo " Task      : Install Ansible "
-	@echo " Date/Time : `date`"
-	@echo "============================================"
-	@cd ${PATH_SCRIPTS} && bash ./install_ansible.sh
-	@echo '- DONE -'
-
-install-docker:
-	@echo "============================================"
-	@echo " Task      : Install Docker "
-	@echo " Date/Time : `date`"
-	@echo "============================================"
-	@cd ${PATH_SCRIPTS} && bash ./install_docker.sh
-	@echo '- DONE -'
-
-install-pyenv:
-	@echo "============================================"
-	@echo " Task      : Install Python Environment "
-	@echo " Date/Time : `date`"
-	@echo "============================================"
-	@cd ${PATH_SCRIPTS} && bash ./install_python_env.sh
-	@python ${PATH_SCRIPTS}/get-pip.py
-	@echo '- DONE -'
-
 run-docker:
 	@echo "============================================"
 	@echo " Task      : Docker Container "
