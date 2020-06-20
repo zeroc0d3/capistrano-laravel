@@ -14,11 +14,11 @@ Zero downtime deployment Laravel with Capistrano
   cd capistrano-laravel
   ./run-docker.sh
   ```
-* Edit Laravel source target in `config/deploy.rb`
+* Edit Laravel source target in `docker/compose/rootfs/root/deploy/config/deploy.rb`
   ```
   set :repo_url, "[YOUR_LARAVEL_REPO]"
   ```
-* Edit target server environment in `config/deploy/[environment].rb`
+* Edit target server environment in `docker/compose/rootfs/root/deploy/config/deploy/[environment].rb`
   ```
   server '[YOUR_TARGET_SERVER]'
   ```
@@ -37,7 +37,7 @@ Zero downtime deployment Laravel with Capistrano
   vendor
   yarn.lock
   ```
-* Setup number of release folder in `config/deploy.rb`
+* Setup number of release folder in `docker/compose/rootfs/root/deploy/config/deploy.rb`
   ```
   set :keep_releases, 5    ## keep 5 release folder
   ```
