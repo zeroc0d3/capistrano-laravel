@@ -1,4 +1,8 @@
-## Capistrano-Laravel
+## Capistrano-Laravel [Depreciated]
+
+Move to new repository inside [Deploy Laravel](https://github.com/zeroc0d3/deploy-laravel)
+
+---
 
 Zero downtime deployment Laravel with Capistrano
 
